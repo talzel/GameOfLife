@@ -1,4 +1,5 @@
-mo
+using Base: Bool, String
+
 using JSON
 using DelimitedFiles
 include("game_of_life.jl")
@@ -6,8 +7,8 @@ include("game_of_life.jl")
 
 function main()
     fp_config_file_path = first(ARGS)
-    generations = ARGS[2]
-    println(generations)
+    generations = parse(Int64,ARGS[2])
+
     initial_configuration = get_configuration(fp_config_file_path)
     
     runGol(initial_configuration, generations)
@@ -20,5 +21,7 @@ end
 
 # maybe helpful with better display:
 # https://discourse.julialang.org/t/update-variable-in-logged-message-without-printing-a-new-line/32755
+
+
 
 main()
