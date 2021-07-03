@@ -1,17 +1,16 @@
-
-# using Distributed
-# using ProgressMeter
-# using Genie
+mo
 using JSON
 using DelimitedFiles
+include("game_of_life.jl")
+
 
 function main()
     fp_config_file_path = first(ARGS)
+    generations = ARGS[2]
+    println(generations)
     initial_configuration = get_configuration(fp_config_file_path)
-    display(initial_configuration)
-    println()
-    sleep(5)
-    display(.!initial_configuration)
+    
+    runGol(initial_configuration, generations)
 end
 
 function get_configuration(fp::String)::Matrix{Bool}
