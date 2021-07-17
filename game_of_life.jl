@@ -78,7 +78,7 @@ function create_new_generation(current_generation::Matrix{Bool})::Matrix{Bool}
         end
 
         neighbours_count = length(neighbours[neighbours])
-        println("neighbours $(neighbours)")
+        # println("neighbours $(neighbours)")
         
         # decide if index lives or dies next gen
         next_generation[i] = current_generation[i] ? neighbours_count in [2,3] : neighbours_count == 3
