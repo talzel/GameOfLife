@@ -5,12 +5,13 @@
 function runGol(init_gen,generations::Int64)
     # display(init_gen)
     # println(generations)
-    # display(init_gen)
+    display(init_gen)
     println()
+    prev = init_gen
     for x in [1:1:generations;]
         println("Generation $(x):")
-        new_generation = create_new_generation(init_gen)
-        println(new_generation)
+        new_generation = create_new_generation(prev)
+        display(new_generation)
         prev = new_generation
     end
     # sleep(5)
@@ -21,22 +22,22 @@ end
 function create_new_generation(current_generation::Matrix{Bool})::Matrix{Bool}
     next_generation = zeros(Bool,axes(current_generation))
     for i in CartesianIndices(current_generation)
-        println("current index")
-        println(i)
+        # println("current index")
+        # println(i)
         neighbours = Bool[]
         if i[2] == axes(current_generation,2).stop
             # no east update:
         else
-            println("check east")
-            println(i)
+            # println("check east")
+            # println(i)
             neighbours = [neighbours; current_generation[i + CartesianIndex(0,1)]] # east update
         end
 
         if i[2] == 1
             #no west update
         else
-            println("check west")
-            println(i)
+            # println("check west")
+            # println(i)
             neighbours = [neighbours; current_generation[i + CartesianIndex(0,-1)]] # west update
         end
 
@@ -62,24 +63,22 @@ function create_new_generation(current_generation::Matrix{Bool})::Matrix{Bool}
         if !(i[1] == axes(current_generation,1).stop) # south check
             println("check south")
             println(i)
-            # println(axes(current_generation,1))
             neighbours = [neighbours; current_generation[i + CartesianIndex(1,0)]] # south update
             if !(i[2] == axes(current_generation,2).stop) # south east update
                 println("check south east")
-                println(axes(current_generation,2).stop)
                 println("$(i) -> $(i + CartesianIndex(1,1))")
                 neighbours = [neighbours; current_generation[i + CartesianIndex(1,1)]]
             end
 
             if !(i[2] ==  1) # south west update
                 println("check south west")
-                println("$(i) -> $(i + CartesianIndex(1,1))")
+                println("$(i) -> $(i + CartesianIndex(1,-1))")
                 neighbours = [neighbours; current_generation[i + CartesianIndex(1,-1)]]
             end
         end
 
         neighbours_count = length(neighbours[neighbours])
-
+        println("neighbours $(neighbours)")
         
         # decide if index lives or dies next gen
         next_generation[i] = current_generation[i] ? neighbours_count in [2,3] : neighbours_count == 3
