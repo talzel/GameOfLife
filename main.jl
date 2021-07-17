@@ -1,4 +1,4 @@
-using Base: Bool, String
+using Base: Bool, String, update_stackframes_callback
 
 using JSON
 using DelimitedFiles
