@@ -5,6 +5,7 @@
 function runGol(init_gen,generations::Int64)
     # display(init_gen)
     # println(generations)
+    println("Generation 0:")
     display(init_gen)
     println()
     prev = init_gen
@@ -12,6 +13,7 @@ function runGol(init_gen,generations::Int64)
         println("Generation $(x):")
         new_generation = create_new_generation(prev)
         display(new_generation)
+        println()
         prev = new_generation
     end
     # sleep(5)
