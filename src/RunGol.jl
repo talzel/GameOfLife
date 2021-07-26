@@ -16,6 +16,7 @@ function runGol(init_gen,generations::Int64)
         println()
         prev = new_generation
     end
+    return prev
 end
 
 function neighbours(p::CartesianIndex,vertical_dim::Int, horizonal_dim)
