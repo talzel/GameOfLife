@@ -24,8 +24,11 @@ function neighbours(p::CartesianIndex,vertical_dim::Int, horizonal_dim)
         for x in [p[2] - 1, p[2], p[2] + 1]
             if 1 <= y <= vertical_dim && 1<= x <= horizonal_dim && p[1] != y && p[2] != x
                 neighbours = [neighbours; CartesianIndex(y,x)]
+            end
     return neighbours
+        end
     end
+end
 
 function create_new_generation(current_generation::Matrix{Bool})::Matrix{Bool}
     next_generation = zeros(Bool,axes(current_generation))
@@ -39,8 +42,8 @@ function create_new_generation(current_generation::Matrix{Bool})::Matrix{Bool}
     for i in CartesianIndices(current_generation)
         neighbours = Bool[]
         if !(i[2] == axes(current_generation,2).stop) #east update
-            println(i)
-            println(current_generation[i])
+            # println(i)
+            # println(current_generation[i])
             neighbours = [neighbours; current_generation[i + CartesianIndex(0,1)]] # east update
         end
 
@@ -76,4 +79,6 @@ function create_new_generation(current_generation::Matrix{Bool})::Matrix{Bool}
         next_generation[i] = current_generation[i] ? neighbours_count in [2,3] : neighbours_count == 3
     end
     return next_generation
+end
+
 end

@@ -2,7 +2,7 @@ using Base: Bool, String
 
 using JSON
 using DelimitedFiles
-include("game_of_life.jl")
+include("src/GameOfLife.jl")
 
 
 function main()
@@ -11,7 +11,7 @@ function main()
 
     initial_configuration = get_configuration(fp_config_file_path)
     
-    runGol(initial_configuration, generations)
+    GameOfLife.run(initial_configuration, generations)
 end
 
 function get_configuration(fp::String)::Matrix{Bool}
