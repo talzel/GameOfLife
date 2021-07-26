@@ -3,7 +3,7 @@ module RunGol
 # https://discourse.julialang.org/t/is-the-a-function-that-essentially-does-foldr-but-witha-stopping-condition/36875/2
 
 
-function runGol(init_gen,generations::Int64)
+function runGol(init_gen::AbstractArray{Bool,2},generations::Int64)::AbstractArray{Bool,2}
     println("Generation 0:")
     display(init_gen)
     println()
@@ -31,7 +31,7 @@ function neighbours(p::CartesianIndex,vertical_dim::Int, horizonal_dim)
     end
 end
 
-function create_new_generation(current_generation::Matrix{Bool})::Matrix{Bool}
+function create_new_generation(current_generation::AbstractArray{Bool,2})::AbstractArray{Bool,2}
     next_generation = zeros(Bool,axes(current_generation))
 
     function vertical_border(i, limit,coordinate)
